@@ -1,8 +1,9 @@
-<script>
+<script lang="ts">
 	import { onMount } from 'svelte';
 	import { tweened } from 'svelte/motion';
 	import { cubicOut } from 'svelte/easing';
 	import { fade } from 'svelte/transition';
+	import { navigateTo } from '$lib/utils';
 
 	let isInputRevealed = false;
 
@@ -13,6 +14,12 @@
 		}, 1500);
 
 	const headerMarginBottom = tweened(0, { duration: 800, easing: cubicOut });
+
+	const navigatorController = (destination: string) => {
+		return (e: Event) => {
+			navigateTo(destination);
+		};
+	};
 
 	onMount(() => {
 		inputRevealTimer();
@@ -41,7 +48,7 @@
 		<div class="absolute bottom-28" in:fade>
 			<button
 				class="flex justify-center items-center w-72 h-14 rounded-xl bg-white drop-shadow text-black-600 text-lg font-bold"
-				>시작하기</button
+				on:click={navigatorController('home')}>시작하기</button
 			>
 		</div>
 	{/if}
