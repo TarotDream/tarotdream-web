@@ -1,7 +1,15 @@
 <script lang="ts">
 	import NavBar from '$lib/components/NavBar.svelte';
+	import { navigateTo, destinationAsURI } from '$lib/utils';
+	import { DREAM_MENU, PENDING } from '$lib/constants/strings';
 
 	let content = '';
+
+	const navigatorController = (destination: string) => {
+		return (e: Event) => {
+			navigateTo(destinationAsURI([DREAM_MENU, PENDING]));
+		};
+	};
 </script>
 
 <div class="page-wrapper flex justify-center items-center">
@@ -21,8 +29,9 @@
 				<span class="text-secondary">200</span>
 			</div>
 		</div>
-		<button class="absolute bottom-16 w-full h-14 drop-shadow bg-control rounded-xl text-white"
-			>카드 받아보기</button
+		<button
+			class="absolute bottom-16 w-full h-14 drop-shadow bg-control rounded-xl text-white"
+			on:click={navigatorController('')}>카드 받아보기</button
 		>
 	</div>
 	<NavBar currentClickedMenu="dream" />
