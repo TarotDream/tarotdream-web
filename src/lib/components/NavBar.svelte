@@ -17,8 +17,9 @@
 	});
 </script>
 
+<div class="w-full h-16" />
 <div
-	class="absolute bottom-0 flex justify-between items-center w-full h-16 px-12 drop-shadow bg-white"
+	class="fixed bottom-0 left-0 right-0 flex justify-between items-center w-full sm:max-w-sm h-16 px-12 mx-auto drop-shadow bg-white"
 >
 	<a href={destinationAsURI([DREAM_MENU])} class="text-control {isFocusedMenu(DREAM_MENU)}"
 		><Draw /></a

@@ -5,14 +5,14 @@
 
 	let content = '';
 
-	const navigatorController = (destination: string) => {
+	const navigatorController = (destination: string[]) => {
 		return (e: Event) => {
-			navigateTo(destinationAsURI([DREAM_MENU, PENDING]));
+			navigateTo(destinationAsURI(destination));
 		};
 	};
 </script>
 
-<div class="page-wrapper flex justify-center items-center">
+<div class="page-wrapper flex flex-col justify-center items-center px-4">
 	<div class="relative flex flex-col items-center justify-center gap-2 w-full h-full mb-16">
 		<h2 class="font-bold text-lg">당신의 꿈 이야기를 들려주세요</h2>
 		<div class="relative w-full">
@@ -31,8 +31,8 @@
 		</div>
 		<button
 			class="absolute bottom-16 w-full h-14 drop-shadow bg-control rounded-xl text-white"
-			on:click={navigatorController('')}>카드 받아보기</button
+			on:click={navigatorController([DREAM_MENU, PENDING])}>카드 받아보기</button
 		>
 	</div>
-	<NavBar currentClickedMenu="dream" />
+	<NavBar currentClickedMenu={DREAM_MENU} />
 </div>
