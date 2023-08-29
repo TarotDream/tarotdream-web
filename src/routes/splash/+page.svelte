@@ -10,7 +10,7 @@
 	const inputRevealTimer = () =>
 		setTimeout(() => {
 			isInputRevealed = true;
-			headerMarginBottom.set(window.innerHeight * 0.45);
+			headerMarginBottom.set(window.innerHeight * 0.5);
 		}, 1500);
 
 	const headerMarginBottom = tweened(0, { duration: 800, easing: cubicOut });
@@ -45,7 +45,7 @@
 				<h2 class="text-xl font-bold text-white">님!</h2>
 			</div>
 		</div>
-		<div class="absolute bottom-28" in:fade={{ delay: 500 }}>
+		<div class="absolute bottom-16" in:fade={{ delay: 500 }}>
 			<button
 				class="flex justify-center items-center w-72 h-14 rounded-xl bg-white drop-shadow text-black-600 text-lg font-bold"
 				on:click={navigatorController('home')}>시작하기</button
