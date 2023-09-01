@@ -3,9 +3,9 @@
 	import { destinationAsURI } from '$lib/utils';
 	import { onDestroy } from 'svelte';
 
-	import Draw from '$lib/assets/Draw.svelte';
-	import Home from '$lib/assets/Home.svelte';
-	import Profile from '$lib/assets/Profile.svelte';
+	import Draw from '$lib/components/nav/Draw.svelte';
+	import Home from '$lib/components/nav/Home.svelte';
+	import Profile from '$lib/components/nav/Profile.svelte';
 
 	export let currentClickedMenu = 'default';
 

@@ -5,3 +5,5 @@ export const navigateTo = (destination: string) => {
 };
 
 export const destinationAsURI = (menus: string[]) => '/' + menus.join('/');
+
+export const numberToString = (value : number) : string => value + '';

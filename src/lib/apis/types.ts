@@ -1,19 +1,21 @@
-// type declarations
-
+//** Type Declaration Common */
 type timestamptz = string;
-
 type uri = string;
 
+//** Response Common */
+export interface CommonResponse<T> {
+	success: boolean;
+	error: null | number;
+	response: T;
+}
+
+//** DreamCard generation */
 export interface DreamCard {
-	id: string;
-	title: string;
-	created_at: timestamptz;
-	content: string;
-	imageUri: uri;
+	dreamId: number;
+	dreamTitle: string;
+	engDreamTitle: string;
+	imageUrl: uri;
+	posssibleMeanings: string[];
+	recommendedTarotCard: string;
+	created: timestamptz;
 }
-
-export interface keywords {
-	keywords: string[];
-}
-
-export interface DreamCardResponse extends DreamCard, keywords {}
