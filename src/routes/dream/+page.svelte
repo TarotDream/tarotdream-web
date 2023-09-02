@@ -6,7 +6,7 @@
 	
 	import { postDream } from '$lib/apis/api';
 	import type { AxiosResponse } from 'axios';
-	import type { CommonResponse, DreamCard } from '$lib/apis/types';
+	import type { CommonResponse, dreamCard } from '$lib/apis/types';
 
 	import { navigateTo, numberToString, destinationAsURI } from "$lib/utils"
 	import { postDreamURI } from "$lib/constants/apis"
@@ -15,12 +15,12 @@
 	let directiveParentElementWidth : number;
 
 	let cardGenerationStarted = false;
-	let promiseOfCardGeneration : Promise<AxiosResponse<CommonResponse<DreamCard>, any>>
+	let promiseOfCardGeneration : Promise<AxiosResponse<CommonResponse<dreamCard>, any>>
 
 	const cardGenerationHandler = (content:string, uriDestination: string) => {
 		cardGenerationStarted = true;
 		return (e: Event) => {
-			promiseOfCardGeneration = postDream<DreamCard>(uriDestination, {dreamStory : content}, {headers : {'Content-Type' : 'application/json'}});
+			promiseOfCardGeneration = postDream<dreamCard>(uriDestination, {dreamStory : content}, {headers : {'Content-Type' : 'application/json'}});
 		};
 	};
 
