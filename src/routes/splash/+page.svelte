@@ -36,12 +36,12 @@
 		TAROT-MONG
 	</h1>
 	{#if isInputRevealed}
-		<div class="absolute flex flex-col items-center gap-2 w-full px-11" in:fade={{ delay: 500 }}>
+		<div class="absolute flex flex-col items-center gap-8 w-full px-11" in:fade={{ delay: 500 }}>
 			<h2 class="w-full text-2xl text-white font-bold text-left">안녕하세요,</h2>
-			<div class="flex gap-2 w-full">
+			<div class="flex items-end gap-2 w-full">
 				<input
 					type="text"
-					class="w-full bg-transparent border-b border-white focus:outline-none text-center text-lg text-white"
+					class="w-full bg-transparent border-b-2 border-white focus:outline-none text-center text-lg text-white placeholder:text-white font-semibold"
 					value=""
 					placeholder="익명"
 				/>
