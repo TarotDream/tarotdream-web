@@ -1,6 +1,7 @@
 import { goto } from '$app/navigation';
 import { moveBack } from './constants/strings';
 import { showModal, modalName } from '$lib/stores';
+import type { dreamCard } from './apis/types';
 
 //** [naviagtor] navigating to specific uri */
 export const navigateTo = (destination: string) => {
@@ -35,4 +36,13 @@ export const mountModal = (name : string) => {
 export const destroyModal = () => {
 	showModal.set(false);
 	modalName.set('default');
+}
+
+//** [utility] sort by time */
+export const sortDreamInDescendingOrder = (dreams : dreamCard[]) => {
+	return dreams.sort((dreamA, dreamB) => {
+		const dreamADate = new Date(dreamA.created);
+		const dreamBDate = new Date(dreamB.created);
+		return dreamBDate.getTime() - dreamADate.getTime();
+	})
 }
