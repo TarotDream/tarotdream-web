@@ -29,7 +29,9 @@
 				<p class="text-xs font-semibold">{dream.response.created}</p>
 			</div>
 			<!-- content -->
-			<p class="break-words">{dream.response.posssibleMeanings}</p>
+			{#each dream.response.possibleMeanings as meanings}
+				<p class="break-words">{meanings}</p>
+			{/each}
 		</div>
 		<!-- buttons -->
 		<div class="flex flex-col gap-4 w-full p-4">

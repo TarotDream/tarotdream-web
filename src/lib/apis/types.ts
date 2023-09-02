@@ -15,7 +15,7 @@ export interface DreamCard {
 	dreamTitle: string;
 	engDreamTitle: string;
 	imageUrl: uri;
-	posssibleMeanings: string[];
+	possibleMeanings: string[];
 	recommendedTarotCard: string;
 	created: timestamptz;
 }
