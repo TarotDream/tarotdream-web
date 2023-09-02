@@ -42,7 +42,8 @@
 				<input
 					type="text"
 					class="w-full bg-transparent border-b border-white focus:outline-none text-center text-lg text-white"
-					value="익명"
+					value=""
+					placeholder="익명"
 				/>
 				<h2 class="text-xl font-bold text-white">님!</h2>
 			</div>
