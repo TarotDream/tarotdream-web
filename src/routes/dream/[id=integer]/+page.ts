@@ -1,11 +1,11 @@
 import { getSingleDreamURI } from "$lib/constants/apis"
 import { getSingleDream } from "$lib/apis/api.js";
-import type { DreamCard } from "$lib/apis/types.js";
+import type { dreamCard } from "$lib/apis/types.js";
 
 //** fetch dream data */
 const fetchSingleDream = async (dreamId : string) => {
   try {
-    const card = await getSingleDream<DreamCard>(getSingleDreamURI(dreamId));
+    const card = await getSingleDream<dreamCard>(getSingleDreamURI(dreamId));
     return card.data;
   } catch(err) {
     console.log('ERR : fetching Single Dream / ' + err);

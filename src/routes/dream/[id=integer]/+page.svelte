@@ -6,13 +6,26 @@
 	import Icon from '$lib/components/Icon.svelte';
 	import { timestampToY4M2D2 } from "$lib/utils"
 	import AppBar from '$lib/components/AppBar.svelte';
+	import { postDreamImage } from '$lib/apis/api.js';
+	import { postDreamImageURI } from '$lib/constants/apis.js';
 
 	export let data;
 	
 	const { dream } : { dream : CommonResponse<dreamCard> | null} = data;
+
+	// TODO : regenerating dream image need to be implemented
+	const fetchDreamImage = async (dreamId : string, engDreamTitle : string, recommendedTarotCard : string) => {
+		try {
+			await postDreamImage(postDreamImageURI(), {dreamId, engDreamTitle, recommendedTarotCard});
+			
+		} catch(err) {
+			console.log('ERR : generating new dream image / ' + err);
+			return null;
+		}
+	}
 </script>
 
-<!-- TODO : when dream data is null, have to show other component -->
+<!-- TODO : when dream data is null, have to show other UI -->
 {#if dream !== null}
 	<div class="page-wrapper">
 		<AppBar hasBack={true} title={dream?.response.dreamTitle}/>
