@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { DREAM_MENU, HOME_MENU, PROFILE_MENU } from '$lib/constants/strings';
+	import { DREAM_MENU, HOME_MENU, PROFILE_MENU, NEUTRAL_MENU } from '$lib/constants/strings';
 	import { destinationAsURI } from '$lib/utils';
 	import { onDestroy } from 'svelte';
 
@@ -7,13 +7,13 @@
 	import Home from '$lib/components/nav/Home.svelte';
 	import Profile from '$lib/components/nav/Profile.svelte';
 
-	export let currentClickedMenu = 'default';
+	export let currentClickedMenu = NEUTRAL_MENU;
 
 	$: isFocusedMenu = (menu: string): string =>
 		menu === currentClickedMenu ? 'text-control' : 'text-gray-400';
 
 	onDestroy(() => {
-		currentClickedMenu = 'default';
+		currentClickedMenu = NEUTRAL_MENU;
 	});
 </script>
 

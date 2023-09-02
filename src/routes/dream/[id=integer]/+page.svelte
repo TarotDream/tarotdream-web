@@ -1,6 +1,6 @@
 <script lang="ts">
 	import NavBar from '$lib/components/NavBar.svelte';
-	import { DREAM_MENU } from '$lib/constants/strings';
+	import { NEUTRAL_MENU } from '$lib/constants/strings';
 	import { BLACK_600 } from '$lib/constants/colors';
 	import type { CommonResponse, dreamCard } from '$lib/apis/types';
 	import Icon from '$lib/components/Icon.svelte';
@@ -71,6 +71,6 @@
 			</div>
 		</div>
 
-		<NavBar currentClickedMenu={DREAM_MENU} />
+		<NavBar currentClickedMenu={NEUTRAL_MENU} />
 	</div>
 {/if}
