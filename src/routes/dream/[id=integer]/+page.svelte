@@ -4,23 +4,30 @@
 	import { BLACK_600 } from '$lib/constants/colors';
 	import type { CommonResponse, dreamCard } from '$lib/apis/types';
 	import Icon from '$lib/components/Icon.svelte';
-	import { timestampToY4M2D2 } from "$lib/utils"
+	import { numberToString, timestampToY4M2D2 } from "$lib/utils"
 	import AppBar from '$lib/components/AppBar.svelte';
 	import { postDreamImage } from '$lib/apis/api.js';
 	import { postDreamImageURI } from '$lib/constants/apis.js';
+	import { invalidateAll } from '$app/navigation';
+	import { mountModal, destroyModal } from "$lib/utils";
+	import { dreamRegenerateModal } from "$lib/constants/strings"
 
 	export let data;
 	
 	const { dream } : { dream : CommonResponse<dreamCard> | null} = data;
 
-	// TODO : regenerating dream image need to be implemented
-	const fetchDreamImage = async (dreamId : string, engDreamTitle : string, recommendedTarotCard : string) => {
-		try {
-			await postDreamImage(postDreamImageURI(), {dreamId, engDreamTitle, recommendedTarotCard});
-			
-		} catch(err) {
-			console.log('ERR : generating new dream image / ' + err);
-			return null;
+	console.log(dream);
+
+	const fetchDreamImage = (dreamId : string) => {
+		return async (e:Event) => {
+			mountModal(dreamRegenerateModal)
+			try {
+				await postDreamImage(postDreamImageURI(), { dreamId });
+				invalidateAll();
+			} catch(err) {
+				console.log('ERR : generating new dream image / ' + err);
+			}
+			destroyModal();
 		}
 	}
 </script>
@@ -52,7 +59,7 @@
 		</div>
 		<!-- buttons -->
 		<div class="flex flex-col gap-4 w-full p-4">
-			<button class="w-full h-14 bg-control text-white rounded-xl drop-shadow">카드 다시 받기</button>
+			<button class="w-full h-14 bg-control text-white rounded-xl drop-shadow" on:click={fetchDreamImage(numberToString(dream.response.dreamId))}>카드 다시 받기</button>
 			<div class="flex gap-4">
 				<button class="flex-1 w-full h-14 rounded-xl bg-white border border-gray-200 drop-shadow truncate"
 					>카드 저장하기</button
