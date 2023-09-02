@@ -2,12 +2,13 @@
 	import NavBar from '$lib/components/NavBar.svelte';
 	import { DREAM_MENU } from '$lib/constants/strings';
 	import { BLACK_600 } from '$lib/constants/colors';
-	import type { CommonResponse, DreamCard } from '$lib/apis/types';
+	import type { CommonResponse, dreamCard } from '$lib/apis/types';
 	import Icon from '$lib/components/Icon.svelte';
+	import { timestampToY4M2D2 } from "$lib/utils"
 
 	export let data;
 	
-	const { dream } : { dream : CommonResponse<DreamCard> | null} = data;
+	const { dream } : { dream : CommonResponse<dreamCard> | null} = data;
 </script>
 
 {#if dream !== null}
@@ -21,12 +22,13 @@
 			{/if}
 		</div>
 		<div class="w-full h-[440px]" />
+		<div class="w-full h-1 bg-gray-200" />
 		<!-- other content -->
 		<div class="flex flex-col gap-4 p-4">
 			<!-- title & created_at -->
 			<div class="flex flex-col">
 				<h1 class="font-bold">{dream.response.dreamTitle}</h1>
-				<p class="text-xs font-semibold">{dream.response.created}</p>
+				<p class="text-sm font-semibold">{timestampToY4M2D2(dream.response.created)}</p>
 			</div>
 			<!-- content -->
 			{#each dream.response.possibleMeanings as meanings}

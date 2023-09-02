@@ -9,8 +9,8 @@ export interface CommonResponse<T> {
 	response: T;
 }
 
-//** DreamCard generation */
-export interface DreamCard {
+//** DreamCard generation (CamelCase) */
+export interface dreamCard {
 	dreamId: number;
 	dreamTitle: string;
 	engDreamTitle: string;
