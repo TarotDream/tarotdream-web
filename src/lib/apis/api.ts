@@ -15,7 +15,7 @@ export const postDream = async <T>(
 //** regenerate dream image */
 export const postDreamImage = async <T>(
 	url: string,
-	data?: { dreamId: string; engDreamTitle: string; recommendedTarotCard: string },
+	data?: { dreamId: string;},
 	config?: AxiosRequestConfig
 ): Promise<AxiosResponse<CommonResponse<T>>> => {
 	const response = await modelInstance.post(url, data, config);
