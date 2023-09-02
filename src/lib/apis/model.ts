@@ -35,7 +35,7 @@ const onError = (err: AxiosError | Error): Promise<AxiosError> => {
 		const { method, url } = err.config as InternalAxiosRequestConfig;
 		if (err.response) {
 			const { success, error, response } = err.response.data;
-			console.log(`[API - ERROR] ${method?.toUpperCase} ${url} | ${response}`);
+			console.log(`[API - ERROR] ${method?.toUpperCase()} ${url} | ${response}`);
 		} else {
 			console.log(`[API] | Error ${err.message}`);
 		}
