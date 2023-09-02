@@ -1,7 +1,9 @@
 import { goto } from '$app/navigation';
+import { moveBack } from './constants/strings';
 
 export const navigateTo = (destination: string) => {
-	goto(destination);
+	if(moveBack === destination) history.back();
+	else goto(destination);
 };
 
 export const destinationAsURI = (menus: string[]) => '/' + menus.join('/');

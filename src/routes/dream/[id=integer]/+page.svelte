@@ -5,23 +5,25 @@
 	import type { CommonResponse, dreamCard } from '$lib/apis/types';
 	import Icon from '$lib/components/Icon.svelte';
 	import { timestampToY4M2D2 } from "$lib/utils"
+	import AppBar from '$lib/components/AppBar.svelte';
 
 	export let data;
 	
 	const { dream } : { dream : CommonResponse<dreamCard> | null} = data;
 </script>
 
+<!-- TODO : when dream data is null, have to show other component -->
 {#if dream !== null}
 	<div class="page-wrapper">
+		<AppBar hasBack={true} title={dream?.response.dreamTitle}/>
 		<!-- card image -->
-		<div class="absolute top-0 w-full h-[440px]">
+		<div class="w-full h-[440px]">
 			{#if dream.response.imageUrl !== 'null'}
 				<img src={dream.response.imageUrl} alt={dream.response.dreamTitle} class="w-full h-full object-contain" />
 			{:else}
 				<div class="w-full h-full bg-gray-400" />
 			{/if}
 		</div>
-		<div class="w-full h-[440px]" />
 		<div class="w-full h-1 bg-gray-200" />
 		<!-- other content -->
 		<div class="flex flex-col gap-4 p-4">
@@ -39,7 +41,7 @@
 		<div class="flex flex-col gap-4 w-full p-4">
 			<button class="w-full h-14 bg-control text-white rounded-xl drop-shadow">카드 다시 받기</button>
 			<div class="flex gap-4">
-				<button class="flex-1 w-full h-14 rounded-xl bg-white border border-gray-200 drop-shadow"
+				<button class="flex-1 w-full h-14 rounded-xl bg-white border border-gray-200 drop-shadow truncate"
 					>카드 저장하기</button
 				>
 				<button
