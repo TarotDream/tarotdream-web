@@ -9,6 +9,7 @@
 
 </script>
 
+<!-- TODO : need to fetch dream data implementing infinite-loader -->
 <div class="page-wrapper flex flex-col px-4">
 	<div class="flex flex-col gap-3 w-full pb-20 pt-4">
 		{#if data.dreams === null}
