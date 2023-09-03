@@ -27,14 +27,14 @@
 </script>
 
 <div class="page-wrapper flex flex-col justify-center items-center px-4" bind:offsetWidth={directiveParentElementWidth}>
-	{#if cardGenerationStarted}
-		{#await promiseOfCardGeneration}
+	{#if true}
+		<!-- {#await promiseOfCardGeneration} -->
 			<CardGenerationPending spinnerParentElementWidth={directiveParentElementWidth}/>
-		{:then generatedCard}
-			{navigateTo(destinationAsURI([DREAM_MENU, numberToString(generatedCard.data.response.dreamId)]))}
+		<!-- {:then generatedCard} -->
+			<!-- {navigateTo(destinationAsURI([DREAM_MENU, numberToString(generatedCard.data.response.dreamId)]))}
 		{:catch}
 			<CardGenerationFail iconParentElementWidth={directiveParentElementWidth}/>
-		{/await}
+		{/await} -->
 	{:else}
 		<div class="relative flex flex-col items-center justify-center gap-2 w-full h-full mb-16">
 			<h2 class="font-bold text-lg">당신의 꿈 이야기를 들려주세요</h2>
