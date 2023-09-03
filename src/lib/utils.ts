@@ -48,3 +48,23 @@ export const sortDreamInDescendingOrder = (dreams : dreamCard[]) => {
 }
 
 //** [utility] cache invalidation */
+export const invalidateUriCache = (uri : string) => {
+	return uri + '?timestamp=' + Date.now();
+}
+
+//** [utility] download image */
+// TODO : need to be refactored (Downloading Image Fetched)
+export const downloadImageByUri = async (imageUrl : string, document : Document) => {
+	const fetchedImage = await fetch(imageUrl);
+	const blobImage = await fetchedImage.blob();
+	const objectUrl = URL.createObjectURL(blobImage);
+	const extractedFileName = imageUrl.substr(imageUrl.lastIndexOf("/") + 1);
+						
+	const temporalHref = document.createElement("a");
+	temporalHref.href = objectUrl;
+	temporalHref.style.visibility = "hidden";
+	temporalHref.download = extractedFileName;
+	document.body.appendChild(temporalHref);
+	temporalHref.click();
+	document.body.removeChild(temporalHref);
+}

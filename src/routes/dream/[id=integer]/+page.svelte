@@ -8,7 +8,7 @@
 	import AppBar from '$lib/components/AppBar.svelte';
 	import { postDreamImage } from '$lib/apis/api.js';
 	import { postDreamImageURI } from '$lib/constants/apis.js';
-	import { mountModal, destroyModal } from "$lib/utils";
+	import { mountModal, destroyModal, invalidateUriCache, downloadImageByUri } from "$lib/utils";
 	import { dreamRegenerateModal } from "$lib/constants/strings"
 	import { toastMessage } from '$lib/stores.js';
 
@@ -19,13 +19,12 @@
 	let response = dream?.response;
 	let imageUrl = response?.imageUrl;
 
-	// TODO : need to implement function which invalidate image cache data
 	const fetchDreamImage = (dreamId : string) => {
 		return async (e:Event) => {
 			mountModal(dreamRegenerateModal)
 			try {
 				const { data } = await postDreamImage<dreamCard>(postDreamImageURI(), { dreamId }, { headers: {"Cache-Control" : "no-store"}});
-				imageUrl = data.response.imageUrl + '?timestamp=' + Date.now();
+				imageUrl = invalidateUriCache(data.response.imageUrl)
 			} catch(err) {
 				console.log('ERR : generating new dream image / ' + err);
 			}
@@ -33,12 +32,22 @@
 		}
 	}
 
-	// TODO : need to implement image download
-	const downloadImage = async (e : Event) => {
-		try {
-			$toastMessage = "이미지 다운로드가 완료되었습니다";
-		} catch(err) {
-			console.log(err);
+	// TODO : need to be refactored (Downloading Image Fetched)
+	const downloadImage = (imageUrl : string | undefined) => {
+		return async (e : Event) =>  {
+			if (!/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) {
+				if(imageUrl === undefined) {
+					$toastMessage = "이미지 다운로드가 실패했습니다"
+				}
+				else {
+					try {
+						await downloadImageByUri(imageUrl, document);
+						$toastMessage = "이미지 다운로드가 완료되었습니다";
+					} catch(err) {
+						console.log(err);
+					}
+				}
+			}
 		}
 	} 
 </script>
@@ -72,7 +81,7 @@
 			<button class="w-full h-14 bg-control text-white rounded-xl drop-shadow" on:click={fetchDreamImage(numberToString(response.dreamId))}>카드 다시 받기</button>
 			<div class="flex gap-4">
 				<button class="flex-1 w-full h-14 rounded-xl bg-white border border-gray-200 drop-shadow truncate" 
-					on:click={downloadImage}
+					on:click={downloadImage(imageUrl)}
 					>카드 저장하기</button
 				>
 				<a
