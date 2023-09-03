@@ -1,6 +1,6 @@
 <script lang="ts">
 	import NavBar from '$lib/components/NavBar.svelte';
-	import { NEUTRAL_MENU } from '$lib/constants/strings';
+	import { HOME_MENU, NEUTRAL_MENU } from '$lib/constants/strings';
 	import { BLACK_600 } from '$lib/constants/colors';
 	import type { CommonResponse, dreamCard } from '$lib/apis/types';
 	import Icon from '$lib/components/Icon.svelte';
@@ -8,22 +8,22 @@
 	import AppBar from '$lib/components/AppBar.svelte';
 	import { postDreamImage } from '$lib/apis/api.js';
 	import { postDreamImageURI } from '$lib/constants/apis.js';
-	import { invalidateAll } from '$app/navigation';
 	import { mountModal, destroyModal } from "$lib/utils";
 	import { dreamRegenerateModal } from "$lib/constants/strings"
 
 	export let data;
 	
-	const { dream } : { dream : CommonResponse<dreamCard> | null} = data;
+	const { dream } : { dream : CommonResponse<dreamCard> | null } = data;
+	let response = dream?.response;
+	let imageUrl = response?.imageUrl;
 
-	$: response = dream?.response;
-
+	// TODO : need to implement function which invalidate image cache data
 	const fetchDreamImage = (dreamId : string) => {
 		return async (e:Event) => {
 			mountModal(dreamRegenerateModal)
 			try {
 				const { data } = await postDreamImage<dreamCard>(postDreamImageURI(), { dreamId }, { headers: {"Cache-Control" : "no-store"}});
-				response = data.response;
+				imageUrl = data.response.imageUrl + '?timestamp=' + Date.now();
 			} catch(err) {
 				console.log('ERR : generating new dream image / ' + err);
 			}
@@ -32,14 +32,13 @@
 	}
 </script>
 
-<!-- TODO : when dream data is null, have to show other UI -->
-{#if response !== undefined}
+{#if response}
 	<div class="page-wrapper">
 		<AppBar hasBack={true} title={response.dreamTitle}/>
 		<!-- card image -->
 		<div class="w-full h-[440px]">
-			{#if response.imageUrl !== 'null'}
-				<img src={response?.imageUrl} alt={response.dreamTitle} class="w-full h-full object-contain" />
+			{#if imageUrl !== undefined}
+				<img src={imageUrl} alt={response.dreamTitle} class="w-full h-full object-contain" />
 			{:else}
 				<div class="w-full h-full bg-gray-400" />
 			{/if}
