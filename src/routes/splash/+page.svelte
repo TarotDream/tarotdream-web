@@ -33,7 +33,7 @@
 		class="w-full text-center text-4xl text-white font-bold"
 		style:margin-bottom="{$headerMarginBottom}px"
 	>
-		TAROT-MONG
+		타로몽
 	</h1>
 	{#if isInputRevealed}
 		<div class="absolute flex flex-col items-center gap-8 w-full px-11" in:fade={{ delay: 500 }}>
@@ -51,7 +51,7 @@
 		<div class="absolute bottom-16" in:fade={{ delay: 500 }}>
 			<button
 				class="flex justify-center items-center w-72 h-14 rounded-xl bg-white drop-shadow text-black-600 text-lg font-bold"
-				on:click={navigatorController(destinationAsURI([HOME_MENU]))}>타로몽 시작하기</button
+				on:click={navigatorController(destinationAsURI([HOME_MENU]))}>시작하기</button
 			>
 		</div>
 	{/if}
