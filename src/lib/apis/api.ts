@@ -23,8 +23,8 @@ export const postDreamImage = async <T>(
 };
 
 //** get single dream with corresponding dream id */
-export const getSingleDream = async<T>(url:string) : Promise<AxiosResponse<CommonResponse<T>>> =>{
-	const response = await modelInstance.get(url);
+export const getSingleDream = async<T>(url:string, config?: AxiosRequestConfig) : Promise<AxiosResponse<CommonResponse<T>>> =>{
+	const response = await modelInstance.get(url, config);
 	return response;
 }
 

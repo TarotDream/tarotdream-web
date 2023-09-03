@@ -16,14 +16,14 @@
 	
 	const { dream } : { dream : CommonResponse<dreamCard> | null} = data;
 
-	console.log(dream);
+	$: response = dream?.response;
 
 	const fetchDreamImage = (dreamId : string) => {
 		return async (e:Event) => {
 			mountModal(dreamRegenerateModal)
 			try {
-				await postDreamImage(postDreamImageURI(), { dreamId });
-				invalidateAll();
+				const { data } = await postDreamImage<dreamCard>(postDreamImageURI(), { dreamId }, { headers: {"Cache-Control" : "no-store"}});
+				response = data.response;
 			} catch(err) {
 				console.log('ERR : generating new dream image / ' + err);
 			}
@@ -33,13 +33,13 @@
 </script>
 
 <!-- TODO : when dream data is null, have to show other UI -->
-{#if dream !== null}
+{#if response !== undefined}
 	<div class="page-wrapper">
-		<AppBar hasBack={true} title={dream?.response.dreamTitle}/>
+		<AppBar hasBack={true} title={response.dreamTitle}/>
 		<!-- card image -->
 		<div class="w-full h-[440px]">
-			{#if dream.response.imageUrl !== 'null'}
-				<img src={dream.response.imageUrl} alt={dream.response.dreamTitle} class="w-full h-full object-contain" />
+			{#if response.imageUrl !== 'null'}
+				<img src={response?.imageUrl} alt={response.dreamTitle} class="w-full h-full object-contain" />
 			{:else}
 				<div class="w-full h-full bg-gray-400" />
 			{/if}
@@ -49,11 +49,11 @@
 		<div class="flex flex-col gap-4 p-4">
 			<!-- title & created_at -->
 			<div class="flex flex-col">
-				<h1 class="font-bold">{dream.response.dreamTitle}</h1>
-				<p class="text-sm font-semibold">{timestampToY4M2D2(dream.response.created)}</p>
+				<h1 class="font-bold">{response.dreamTitle}</h1>
+				<p class="text-sm font-semibold">{timestampToY4M2D2(response.created)}</p>
 			</div>
 			<!-- content -->
-			{#each dream.response.possibleMeanings as meanings}
+			{#each response.possibleMeanings as meanings}
 				<p class="break-words">{meanings}</p>
 			{/each}
 		</div>

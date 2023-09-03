@@ -5,7 +5,7 @@ import type { dreamCard } from "$lib/apis/types.js";
 //** fetch dream data */
 const fetchSingleDream = async (dreamId : string) => {
   try {
-    const card = await getSingleDream<dreamCard>(getSingleDreamURI(dreamId));
+    const card = await getSingleDream<dreamCard>(getSingleDreamURI(dreamId), {headers : {"Cache-Control" : "no-store"}});
     return card.data;
   } catch(err) {
     console.log('ERR : fetching Single Dream / ' + err);
