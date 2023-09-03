@@ -95,6 +95,7 @@
 			<button class="w-full h-14 bg-control text-white rounded-xl drop-shadow" on:click={fetchDreamImage(numberToString(response.dreamId))}>카드 다시 받기</button>
 			<div class="flex gap-4">
 				<button class="flex-1 w-full h-14 rounded-xl bg-white border border-gray-200 drop-shadow truncate" 
+					id="save-dream"
 					on:click={downloadImageHandler(imageUrl)}
 					>카드 저장하기
 				</button>
