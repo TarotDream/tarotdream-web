@@ -58,13 +58,14 @@
 		</div>
 		<!-- buttons -->
 		<div class="flex flex-col gap-4 w-full p-4">
-			<button class="w-full h-14 bg-control text-white rounded-xl drop-shadow" on:click={fetchDreamImage(numberToString(dream.response.dreamId))}>카드 다시 받기</button>
+			<button class="w-full h-14 bg-control text-white rounded-xl drop-shadow" on:click={fetchDreamImage(numberToString(response.dreamId))}>카드 다시 받기</button>
 			<div class="flex gap-4">
-				<button class="flex-1 w-full h-14 rounded-xl bg-white border border-gray-200 drop-shadow truncate"
+				<button class="flex-1 w-full h-14 rounded-xl bg-white border border-gray-200 drop-shadow truncate" id="save-dream"
 					>카드 저장하기</button
 				>
 				<button
 					class="flex justify-center items-center w-14 h-14 border border-gray-200 rounded-xl drop-shadow bg-white"
+					id="share-dream"
 					><Icon icon="share-2" fill={BLACK_600} /></button
 				>
 			</div>
