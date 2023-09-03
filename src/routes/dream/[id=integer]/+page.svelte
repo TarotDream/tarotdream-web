@@ -38,7 +38,7 @@
 		<!-- card image -->
 		<div class="w-full h-[440px]">
 			{#if imageUrl !== undefined}
-				<img src={imageUrl} alt={response.dreamTitle} class="w-full h-full object-contain" />
+				<img src={imageUrl} alt={response.dreamTitle} class="w-full h-full object-contain" id="dream-image" />
 			{:else}
 				<div class="w-full h-full bg-gray-400" />
 			{/if}
