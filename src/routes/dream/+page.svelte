@@ -43,7 +43,7 @@
 					class="resize-none bg-gray-200 w-full p-2 rounded-xl focus:outline-none"
 					cols="30"
 					rows="5"
-					placeholder="자동차 사고가 난 꿈"
+					placeholder="(예시) 자동차 사고가 난 꿈 / 첫사랑을 다시 만나는 꿈"
 					maxlength="200"
 					bind:value={content}
 				/>

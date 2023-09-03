@@ -55,7 +55,9 @@
 			try {
 				await navigator.clipboard.writeText(dreamUri);
 				$toastMessage = "클립보드에 주소를 복사했습니다";
-				if (isDevieMobile()) navigateTo(INSTAGRAM_DOMAIN);
+				setInterval(() => {
+					navigateTo(INSTAGRAM_DOMAIN);
+				}, 2000)
 			} catch(err) {
 				$toastMessage = "주소 복사 실패"
 				console.log("[Error] Copying ClipBoard / " + err);
