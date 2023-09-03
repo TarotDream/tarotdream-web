@@ -43,7 +43,8 @@
 						await downloadImageByUri(imageUrl, document);
 						$toastMessage = "이미지 다운로드가 완료되었습니다";
 					} catch(err) {
-						console.log(err);
+						$toastMessage = "이미지 다운로드가 실패했습니다"
+						console.log("[Error] Downloading image / " + err);
 					}
 				}
 			}
@@ -51,8 +52,16 @@
 	} 
 
 	const shareImageHandler = (dreamUri : string) => {
-		return (e:Event) => {
-			
+		return async(e:Event) => {
+			if (!/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) {
+				try {
+					await navigator.clipboard.writeText(dreamUri);
+					$toastMessage = "클립보드에 주소를 복사했습니다"
+				} catch(err) {
+					$toastMessage = "주소 복사 실패"
+					console.log("[Error] Copying ClipBoard / " + err);
+				}
+			}
 		}
 	}
 </script>
