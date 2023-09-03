@@ -17,7 +17,7 @@
       <Icon icon="chevron-left" size={36}/>
     </button>
   {/if}
-  <h2 class="absolute left-0 w-full text-center text-xl font-bold truncate">{title}</h2>
+  <h1 class="absolute left-0 right-0 w-full mx-auto sm:w-64 text-center text-xl font-bold truncate">{title}</h1>
 </div>
 
 <div class="w-full h-16" /> 

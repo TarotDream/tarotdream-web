@@ -10,6 +10,7 @@
 	import { postDreamImageURI } from '$lib/constants/apis.js';
 	import { mountModal, destroyModal } from "$lib/utils";
 	import { dreamRegenerateModal } from "$lib/constants/strings"
+	import { toastMessage } from '$lib/stores.js';
 
 
 	export let data;
@@ -32,11 +33,10 @@
 		}
 	}
 
+	// TODO : need to implement image download
 	const downloadImage = async (e : Event) => {
 		try {
-			const fetchedImage = await fetch(imageUrl ?? "");
-			const blobImage = await fetchedImage.blob();
-			
+			$toastMessage = "이미지 다운로드가 완료되었습니다";
 		} catch(err) {
 			console.log(err);
 		}

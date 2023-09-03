@@ -3,22 +3,22 @@
 	import { fade } from 'svelte/transition';
 
 	$: {
-		if ($toastMessage) {
+		if ($toastMessage.length > 0) {
 			setTimeout(() => {
-				$toastMessage = null;
+				$toastMessage = '';
 			}, 2000);
 		}
 	}
 </script>
 
-{#if $toastMessage}
+{#if $toastMessage.length > 0}
 	<button
 		on:click={() => {
-			$toastMessage = null;
+			$toastMessage = '';
 		}}
 		transition:fade
 		style="z-index: 1000;"
-		class="fixed left-0 right-0 bottom-8 mx-8 flex items-center justify-center rounded-3xl bg-black p-3 text-center text-white opacity-80 md:mx-auto md:max-w-sm"
+		class="fixed top-20 left-0 right-0 mx-auto w-fit p-2 text-xs text-white font-semibold rounded-xl bg-secondary opacity-80"
 	>
 		{$toastMessage}
 	</button>
