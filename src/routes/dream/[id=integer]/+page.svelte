@@ -8,7 +8,7 @@
 	import AppBar from '$lib/components/AppBar.svelte';
 	import { postDreamImage } from '$lib/apis/api.js';
 	import { TAROT_DREAM_DOMAIN, postDreamImageURI } from '$lib/constants/apis.js';
-	import { mountModal, destroyModal, invalidateUriCache, downloadImageByUri } from "$lib/utils";
+	import { mountModal, destroyModal, invalidateUriCache, downloadImageByUri, isDevieMobile } from "$lib/utils";
 	import { dreamRegenerateModal } from "$lib/constants/strings"
 	import { toastMessage } from '$lib/stores.js';
 
@@ -34,7 +34,7 @@
 
 	const downloadImageHandler = (imageUrl : string | undefined) => {
 		return async (e : Event) =>  {
-			if (!/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) {
+			if (!isDevieMobile()) {
 				if(imageUrl === undefined) {
 					$toastMessage = "이미지 다운로드가 실패했습니다"
 				}
@@ -53,7 +53,7 @@
 
 	const shareImageHandler = (dreamUri : string) => {
 		return async(e:Event) => {
-			if (!/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) {
+			if (!isDevieMobile()) {
 				try {
 					await navigator.clipboard.writeText(dreamUri);
 					$toastMessage = "클립보드에 주소를 복사했습니다"

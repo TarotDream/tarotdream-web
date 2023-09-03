@@ -73,3 +73,6 @@ export const downloadImageByUri = async (imageUrl : string, document : Document)
 	temporalHref.click();
 	document.body.removeChild(temporalHref);
 }
+
+//** [utility] check device type */
+export const isDevieMobile = () => /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)
