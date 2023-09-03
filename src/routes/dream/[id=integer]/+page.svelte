@@ -1,13 +1,13 @@
 <script lang="ts">
 	import NavBar from '$lib/components/NavBar.svelte';
-	import { INSTAGRAM_DOMAIN, NEUTRAL_MENU } from '$lib/constants/strings';
+	import { DREAM_MENU, INSTAGRAM_DOMAIN, NEUTRAL_MENU } from '$lib/constants/strings';
 	import { BLACK_600 } from '$lib/constants/colors';
 	import type { CommonResponse, dreamCard } from '$lib/apis/types';
 	import Icon from '$lib/components/Icon.svelte';
-	import { numberToString, timestampToY4M2D2 } from "$lib/utils"
+	import { destinationAsURI, numberToString, timestampToY4M2D2 } from "$lib/utils"
 	import AppBar from '$lib/components/AppBar.svelte';
 	import { postDreamImage } from '$lib/apis/api.js';
-	import { postDreamImageURI } from '$lib/constants/apis.js';
+	import { TAROT_DREAM_DOMAIN, postDreamImageURI } from '$lib/constants/apis.js';
 	import { mountModal, destroyModal, invalidateUriCache, downloadImageByUri } from "$lib/utils";
 	import { dreamRegenerateModal } from "$lib/constants/strings"
 	import { toastMessage } from '$lib/stores.js';
@@ -32,8 +32,7 @@
 		}
 	}
 
-	// TODO : need to be refactored (Downloading Image Fetched)
-	const downloadImage = (imageUrl : string | undefined) => {
+	const downloadImageHandler = (imageUrl : string | undefined) => {
 		return async (e : Event) =>  {
 			if (!/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) {
 				if(imageUrl === undefined) {
@@ -50,6 +49,12 @@
 			}
 		}
 	} 
+
+	const shareImageHandler = (dreamUri : string) => {
+		return (e:Event) => {
+			
+		}
+	}
 </script>
 
 {#if response}
@@ -81,15 +86,15 @@
 			<button class="w-full h-14 bg-control text-white rounded-xl drop-shadow" on:click={fetchDreamImage(numberToString(response.dreamId))}>카드 다시 받기</button>
 			<div class="flex gap-4">
 				<button class="flex-1 w-full h-14 rounded-xl bg-white border border-gray-200 drop-shadow truncate" 
-					on:click={downloadImage(imageUrl)}
-					>카드 저장하기</button
-				>
-				<a
+					on:click={downloadImageHandler(imageUrl)}
+					>카드 저장하기
+				</button>
+				<button
 					class="flex justify-center items-center w-14 h-14 border border-gray-200 rounded-xl drop-shadow bg-white"
 					id="share-dream"
-					href={INSTAGRAM_DOMAIN}
-					><Icon icon="share-2" fill={BLACK_600} /></a
-				>
+					on:click={shareImageHandler(destinationAsURI([TAROT_DREAM_DOMAIN, DREAM_MENU, numberToString(response.dreamId)], false))}
+					><Icon icon="share-2" fill={BLACK_600} />
+				</button>
 			</div>
 		</div>
 

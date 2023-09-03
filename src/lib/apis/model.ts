@@ -1,9 +1,9 @@
 import axios, { type InternalAxiosRequestConfig } from 'axios';
 import type { AxiosError, AxiosResponse } from 'axios';
-import { TAROT_DREAM_DOMAIN } from"$lib/constants/apis";
+import { TAROT_DREAM_API_DOMAIN } from"$lib/constants/apis";
 
 const modelInstance = axios.create({
-	baseURL: TAROT_DREAM_DOMAIN,
+	baseURL: TAROT_DREAM_API_DOMAIN,
 });
 
 const onRequest = (config: InternalAxiosRequestConfig): InternalAxiosRequestConfig => {

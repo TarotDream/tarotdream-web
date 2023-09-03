@@ -1,5 +1,6 @@
 // TAROT Dream DOMAIN
-export const TAROT_DREAM_DOMAIN = "https://bgremp.com"
+export const TAROT_DREAM_API_DOMAIN = "https://bgremp.com"
+export const TAROT_DREAM_DOMAIN = "https://tarotdeam.netlify.app";
 
 // api destination uri
 export const postDreamURI = () => '/dream/generate';

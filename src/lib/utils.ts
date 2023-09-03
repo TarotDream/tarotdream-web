@@ -10,7 +10,7 @@ export const navigateTo = (destination: string) => {
 };
 
 //** [navigator] making destination */
-export const destinationAsURI = (menus: string[]) => '/' + menus.join('/');
+export const destinationAsURI = (menus: string[], withSlashPrefix = true) => (withSlashPrefix ? '/' : '') + menus.join('/');
 
 //** [utility] making number to string */
 export const numberToString = (value : number) : string => value + '';
@@ -59,6 +59,11 @@ export const downloadImageByUri = async (imageUrl : string, document : Document)
 	const blobImage = await fetchedImage.blob();
 	const objectUrl = URL.createObjectURL(blobImage);
 	const extractedFileName = imageUrl.substr(imageUrl.lastIndexOf("/") + 1);
+
+	console.log(fetchedImage)
+	console.log(blobImage)
+	console.log(objectUrl)
+	console.log(extractedFileName)
 						
 	const temporalHref = document.createElement("a");
 	temporalHref.href = objectUrl;
