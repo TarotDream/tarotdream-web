@@ -1,6 +1,9 @@
 // TAROT Dream DOMAIN
 export const TAROT_DREAM_DOMAIN = "https://bgremp.com"
 
+// INSTAGRAM DOMAIN
+export const INSTAGRAM_DOMAIN = "https://www.instagram.com";
+
 // URI Destinations
 export const DREAM_MENU = 'dream';
 export const HOME_MENU = 'home';
