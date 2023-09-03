@@ -4,7 +4,7 @@
 	import { cubicOut } from 'svelte/easing';
 	import { fade } from 'svelte/transition';
 	import { navigateTo } from '$lib/utils';
-	import { HOME_MENU } from '$lib/constants/strings';
+	import { DREAM_MENU } from '$lib/constants/strings';
 	import { destinationAsURI } from '$lib/utils';
 
 	let isInputRevealed = false;
@@ -51,7 +51,7 @@
 		<div class="absolute bottom-16" in:fade={{ delay: 500 }}>
 			<button
 				class="flex justify-center items-center w-72 h-14 rounded-xl bg-white drop-shadow text-black-600 text-lg font-bold"
-				on:click={navigatorController(destinationAsURI([HOME_MENU]))}>시작하기</button
+				on:click={navigatorController(destinationAsURI([DREAM_MENU]))}>시작하기</button
 			>
 		</div>
 	{/if}
